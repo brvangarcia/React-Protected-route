@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+
+import Home from './Components/home'
+import Contact from './Components/contact'
+import About from './Components/about'
+import Error from './Components/error'
+import Nav from './Components/nav'
+import Dashboard from './Components/dashboard'
+import ProtectedRoute from "./Components/protect";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+      <div>
+      <Nav/>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <Route component={Error}  />
+        </Switch>
+      </div> 
+      </BrowserRouter>
     );
   }
 }
